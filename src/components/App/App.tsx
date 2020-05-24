@@ -11,7 +11,7 @@ import { Link, Redirect, Route, Switch } from 'react-router-dom';
 import routes from '../../config/routes';
 import Loading from '../common/Loading';
 
-const Home = lazy(() => import('../Home'));
+const UserList = lazy(() => import('../UserList'));
 const NotFound = lazy(() => import('../NotFound'));
 
 const AppContainer = styled('div')<{}, Theme>(({ theme }) => ({
@@ -44,8 +44,9 @@ const App: FC = () => (
         </AppBar>
         <Suspense fallback={<Loading />}>
             <Switch>
-                <Route exact path={routes.home}>
-                    <Home />
+                <Redirect exact from={routes.home} to={routes.users} />
+                <Route exact path={routes.users}>
+                    <UserList />
                 </Route>
                 <Route>
                     <NotFound />

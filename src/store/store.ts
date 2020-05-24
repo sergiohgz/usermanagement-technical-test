@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import home from './home';
+import users from './users';
 
 const rootReducer = combineReducers({
-    home,
+    users,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
