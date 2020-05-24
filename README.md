@@ -1,44 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# User management technical test
 
-## Available Scripts
+A simple user management application created for LaLiga as a technical test
 
-In the project directory, you can run:
+## Requirements
 
-### `yarn start`
+The technical requirements to work with this project are:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Node.js >=10
+- Yarn 1
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Installation
 
-### `yarn test`
+To install dependencies, you have to perform next command
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```shell
+yarn install --frozen-lockfile
+# Or it simpler version:
+# yarn --frozen-lockfile
+```
 
-### `yarn build`
+## Technolgies used
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Main
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- [React](https://reactjs.org/)
+- [React Router](https://reacttraining.com/react-router/)
+- [Redux](https://redux.js.org/) using [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Emotion](https://emotion.sh/) as a replacement of Styled Components
+- [Material UI](https://material-ui.com/) to create a Material Design feeling
+- [Axios](https://github.com/axios/axios) as http client
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Secondary technologies
+- [Testing Library](https://testing-library.com/)
+- [ESLint](https://eslint.org/)
+- [Husky](https://github.com/typicode/husky) to enable Git Hooks
+- [Lint Staged](https://github.com/okonet/lint-staged) to lint files in Git stage
+- [Commitlint](https://commitlint.js.org/) to force follow a commit style convention
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) as commit convention
 
-### `yarn eject`
+## Requirements implemented
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [ ] User list
+- [ ] User detail
+  - [ ] Detail
+  - [ ] Remove
+  - [ ] Edition
+- [ ] User login
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## License
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project implementation is under a [MIT license](./LICENSE)

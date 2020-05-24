@@ -1,28 +1,62 @@
 {
-  "name": "usermanagement-laliga-technical-test",
+  "name": "usermanagement-laliga-techinal-test",
+  "description": "A simple user management application created as a technical test",
+  "license": "MIT",
+  "author": "Sergio Herrera Guzman <sergioherreraguz@gmail.com>",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=10"
+  },
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@emotion/core": "10.0.28",
+    "@emotion/styled": "10.0.27",
+    "@material-ui/core": "4.10.0",
+    "@material-ui/icons": "4.9.1",
+    "@reduxjs/toolkit": "1.3.6",
+    "axios": "0.19.2",
+    "emotion-theming": "10.0.27",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-redux": "7.2.0",
+    "react-router-dom": "5.2.0",
+    "redux": "4.0.5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "8.3.5",
+    "@commitlint/config-conventional": "8.3.4",
+    "@testing-library/jest-dom": "5.8.0",
+    "@testing-library/react": "10.0.4",
+    "@testing-library/user-event": "10.3.5",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "@types/react": "16.9.35",
+    "@types/react-dom": "16.9.8",
+    "@types/react-redux": "7.1.9",
+    "@types/react-router-dom": "5.1.5",
+    "@typescript-eslint/eslint-plugin": "2.34.0",
+    "@typescript-eslint/parser": "2.34.0",
+    "eslint": "6.8.0",
+    "eslint-config-airbnb": "18.1.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-prettier": "3.1.3",
+    "eslint-plugin-react": "7.20.0",
+    "eslint-plugin-react-hooks": "4.0.2",
+    "husky": "4.2.5",
+    "jest-environment-jsdom-sixteen": "1.0.3",
+    "lint-staged": "10.2.6",
+    "prettier": "2.0.5",
     "react-scripts": "3.4.1",
-    "typescript": "~3.7.2"
+    "typescript": "3.8.3"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "format": "yarn lint --fix",
+    "lint": "eslint \"{src,rules}/**/*.{js,ts,tsx}\"",
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen"
   },
   "browserslist": {
     "production": [
@@ -35,5 +69,32 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "scope-case": [
+        2,
+        "always",
+        [
+          "lower-case",
+          "camel-case",
+          "pascal-case"
+        ]
+      ]
+    }
   }
 }
