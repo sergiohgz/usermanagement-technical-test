@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { openSnackbar } from '../snackbar';
 import { AppThunk } from '../types';
 import api from './api';
 import { UsersData, UsersState } from './types';
@@ -52,7 +53,9 @@ const getUsers = (): AppThunk<ReturnType<typeof api.getUsers>> => dispatch => {
             return response;
         })
         .catch(error => {
-            dispatch(asyncError(error.toString()));
+            const errorMessage = error.toString();
+            dispatch(asyncError(errorMessage));
+            dispatch(openSnackbar(errorMessage));
             throw error;
         });
 

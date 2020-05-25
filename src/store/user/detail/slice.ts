@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { openSnackbar } from '../../snackbar';
 import { AppThunk } from '../../types';
-import { UserState, UserData } from './types';
 import api from './api';
+import { UserData, UserState } from './types';
 
 const initialState: UserState = {
     asyncLoading: false,
@@ -50,7 +51,9 @@ const getUser = (
             return response;
         })
         .catch(error => {
-            dispatch(asyncError(error.toString()));
+            const errorMessage = error.toString();
+            dispatch(asyncError(errorMessage));
+            dispatch(openSnackbar(errorMessage));
             throw error;
         });
     return promise;
