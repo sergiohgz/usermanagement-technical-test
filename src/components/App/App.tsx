@@ -12,6 +12,7 @@ import routes from '../../config/routes';
 import Loading from '../common/Loading';
 
 const UserList = lazy(() => import('../UserList'));
+const UserDetail = lazy(() => import('../UserDetail'));
 const NotFound = lazy(() => import('../NotFound'));
 
 const AppContainer = styled('div')<{}, Theme>(({ theme }) => ({
@@ -47,6 +48,9 @@ const App: FC = () => (
                 <Redirect exact from={routes.home} to={routes.users} />
                 <Route exact path={routes.users}>
                     <UserList />
+                </Route>
+                <Route exact path={routes.user}>
+                    <UserDetail />
                 </Route>
                 <Route>
                     <NotFound />

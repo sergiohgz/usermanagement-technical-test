@@ -42,7 +42,7 @@ yarn install --frozen-lockfile
 
 - [x] User list
 - [ ] User detail
-  - [ ] Detail
+  - [x] Detail
   - [ ] Remove
   - [ ] Edition
 - [ ] User login
