@@ -1,8 +1,9 @@
 import '@emotion/core';
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import App from './components/App';
+
+import Snackbar from './components/Snackbar';
 import Providers from './config/Providers';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
@@ -10,6 +11,7 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
     <Providers>
         <App />
+        <Snackbar />
     </Providers>,
     document.getElementById('root')
 );

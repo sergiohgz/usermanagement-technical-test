@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
+import snackbar from './snackbar';
 import user from './user';
 import users from './users';
 
 const rootReducer = combineReducers({
+    snackbar,
     user,
     users,
 });
