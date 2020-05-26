@@ -41,10 +41,10 @@ yarn install --frozen-lockfile
 ## Requirements implemented
 
 - [x] User list
-- [ ] User detail
+- [x] User detail
   - [x] Detail
   - [x] Remove
-  - [ ] Edition
+  - [x] Edition
 - [ ] User login
 
 ## License
