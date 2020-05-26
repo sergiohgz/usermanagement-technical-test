@@ -12,9 +12,9 @@ import { editUser } from '../../store/user/edition';
 import { UserEditionData } from '../../store/user/edition/types';
 import { removeUser } from '../../store/user/remove';
 import Loading from '../common/Loading';
+import Info from './Info';
 import InfoEdition from './InfoEdition';
 import SectionBar from './SectionBar';
-import UserInfo from './UserInfo';
 
 const DataContainer = styled('div')<{}, Theme>(({ theme }) => ({
     padding: theme.spacing(2),
@@ -91,7 +91,7 @@ const User: FC = () => {
                 {asyncData ? (
                     <>
                         {!isEditMode ? (
-                            <UserInfo
+                            <Info
                                 firstName={asyncData.firstName}
                                 lastName={asyncData.lastName}
                                 email={asyncData.email}
