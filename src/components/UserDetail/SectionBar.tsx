@@ -1,13 +1,15 @@
 import styled from '@emotion/styled';
 import {
     AppBar,
+    Button,
     Grid,
     IconButton,
     Theme,
     Toolbar,
     Typography,
+    Hidden,
 } from '@material-ui/core';
-import { ArrowBack } from '@material-ui/icons';
+import { ArrowBack, Delete } from '@material-ui/icons';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -20,9 +22,14 @@ const BackLink = styled(Link)<{}, Theme>(({ theme }) => ({
 interface SectionBarProps {
     firstName?: string;
     lastName?: string;
+    onRemoveUser: () => void;
 }
 
-const SectionBar: FC<SectionBarProps> = ({ firstName = '', lastName = '' }) => (
+const SectionBar: FC<SectionBarProps> = ({
+    firstName = '',
+    lastName = '',
+    onRemoveUser,
+}) => (
     <AppBar position="sticky">
         <Toolbar
             component={Grid}
@@ -41,6 +48,18 @@ const SectionBar: FC<SectionBarProps> = ({ firstName = '', lastName = '' }) => (
                 <Typography variant="body1" component="span">
                     {firstName} {lastName}
                 </Typography>
+            </Grid>
+            <Grid item>
+                <Hidden smDown>
+                    <Button onClick={() => onRemoveUser()} color="inherit">
+                        <Delete /> Eliminar
+                    </Button>
+                </Hidden>
+                <Hidden mdUp>
+                    <IconButton onClick={() => onRemoveUser()} color="inherit">
+                        <Delete />
+                    </IconButton>
+                </Hidden>
             </Grid>
         </Toolbar>
     </AppBar>
