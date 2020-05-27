@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    name: Test - Node ${{ matrix.node-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [12.x, 14.x]
+        os: [windows-latest, ubuntu-latest, macOS-latest]
+    steps:
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: yarn --frozen-lockfile
+    - name: Test
+      run: yarn test
+
+  lint:
+    name: Lint - Node ${{ matrix.node-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [12.x, 14.x]
+        os: [windows-latest, ubuntu-latest, macOS-latest]
+    steps:
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: yarn --frozen-lockfile
+    - name: Lint code
+      run: yarn lint
+
+  build:
+    name: Build - Node ${{ matrix.node-version }} on ${{ matrix.os }}
+    needs: [lint, test]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [12.x, 14.x]
+        os: [windows-latest, ubuntu-latest, macOS-latest]
+    steps:
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: yarn --frozen-lockfile
+    - name: Build project
+      run: yarn build
+    - name: Upload artifacts
+      if: ${{ matrix['os'] == 'ubuntu-latest' && matrix['node-version'] == '12.x' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: usermanagement-laliga-technical-test
+        path: build/
