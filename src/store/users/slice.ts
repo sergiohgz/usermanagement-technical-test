@@ -3,14 +3,20 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { openSnackbar } from '../snackbar';
 import { AppThunk } from '../types';
 import api from './api';
-import { UsersData, UsersState } from './types';
+import { UsersData, UsersItemData, UsersState } from './types';
 
 const initialState: UsersState = {
     asyncLoading: false,
 };
 
 const {
-    actions: { asyncStart, asyncSuccess, asyncError, resetUsers },
+    actions: {
+        asyncStart,
+        asyncSuccess,
+        asyncMoreSuccess,
+        asyncError,
+        resetUsers,
+    },
     reducer,
 } = createSlice({
     name: 'users',
@@ -28,6 +34,22 @@ const {
             asyncLoading: false,
             asyncData: payload,
         }),
+        asyncMoreSuccess: (
+            state,
+            { payload }: PayloadAction<UsersData>
+        ): UsersState => {
+            return {
+                ...state,
+                asyncLoading: false,
+                asyncData: {
+                    ...payload,
+                    data: [
+                        ...(state.asyncData?.data as UsersItemData[]),
+                        ...payload.data,
+                    ],
+                },
+            };
+        },
         asyncError: (
             state,
             { payload }: PayloadAction<string>
@@ -62,5 +84,33 @@ const getUsers = (): AppThunk<ReturnType<typeof api.getUsers>> => dispatch => {
     return promise;
 };
 
-export { asyncStart, asyncSuccess, asyncError, getUsers, resetUsers };
+const getMoreUsers = (
+    nextPage?: number
+): AppThunk<ReturnType<typeof api.getUsers>> => dispatch => {
+    dispatch(asyncStart());
+
+    const promise = api
+        .getUsers(nextPage)
+        .then(response => {
+            dispatch(asyncMoreSuccess(response.data));
+            return response;
+        })
+        .catch(error => {
+            const errorMessage = error.toString();
+            dispatch(asyncError(errorMessage));
+            dispatch(openSnackbar(errorMessage));
+            throw error;
+        });
+
+    return promise;
+};
+
+export {
+    asyncStart,
+    asyncSuccess,
+    asyncError,
+    getUsers,
+    getMoreUsers,
+    resetUsers,
+};
 export default reducer;

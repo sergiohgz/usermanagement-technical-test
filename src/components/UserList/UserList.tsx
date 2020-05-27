@@ -1,11 +1,18 @@
 import styled from '@emotion/styled';
-import { AppBar, Theme, Toolbar, Typography } from '@material-ui/core';
+import {
+    AppBar,
+    Button,
+    Grid,
+    Theme,
+    Toolbar,
+    Typography,
+} from '@material-ui/core';
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AppState } from '../../store/store';
 import { AppDispatch } from '../../store/types';
-import { getUsers, resetUsers } from '../../store/users';
+import { getMoreUsers, getUsers, resetUsers } from '../../store/users';
 import Loading from '../common/Loading';
 import ListItem from './ListItem';
 
@@ -15,6 +22,10 @@ const Results = styled('div')<{}, Theme>(({ theme }) => ({
     [theme.breakpoints.up('md')]: {
         width: '85%',
     },
+}));
+
+const LoadMoreButton = styled(Button)<{}, Theme>(({ theme }) => ({
+    margin: theme.spacing(2, 'auto'),
 }));
 
 const UserList: FC = () => {
@@ -30,6 +41,12 @@ const UserList: FC = () => {
         };
     }, [dispatch]);
 
+    const loadMore = (): void => {
+        if (asyncData) {
+            dispatch(getMoreUsers(asyncData.page + 1));
+        }
+    };
+
     return (
         <>
             {asyncLoading && <Loading />}
@@ -42,14 +59,29 @@ const UserList: FC = () => {
             </AppBar>
             <Results>
                 {asyncData ? (
-                    asyncData?.data.map(item => (
-                        <ListItem
-                            key={item.id}
-                            id={item.id}
-                            firstName={item.firstName}
-                            lastName={item.lastName}
-                        />
-                    ))
+                    <>
+                        {asyncData.data.map(item => (
+                            <ListItem
+                                key={item.id}
+                                id={item.id}
+                                firstName={item.firstName}
+                                lastName={item.lastName}
+                            />
+                        ))}
+                        <Grid container justify="flex-end">
+                            {asyncData.page < asyncData.totalPages && (
+                                <Grid item>
+                                    <LoadMoreButton
+                                        color="primary"
+                                        variant="contained"
+                                        onClick={() => loadMore()}
+                                    >
+                                        Ver más
+                                    </LoadMoreButton>
+                                </Grid>
+                            )}
+                        </Grid>
+                    </>
                 ) : (
                     <Typography variant="h5">No hay usuarios</Typography>
                 )}

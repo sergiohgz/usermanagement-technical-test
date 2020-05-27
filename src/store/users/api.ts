@@ -14,10 +14,13 @@ type UserItemResponse = Omit<UsersItemData, 'firstName' | 'lastName'> & {
     last_name: UsersItemData['lastName'];
 };
 
-const getUsers = (): AxiosPromise<UsersData> => {
+const getUsers = (nextPage?: number): AxiosPromise<UsersData> => {
     const config: AxiosRequestConfig = {
         method: 'GET',
         url: '/users',
+        params: {
+            page: nextPage,
+        },
     };
     return apiClient(config).then(
         (response: AxiosResponse<ListDataResponse<UserItemResponse>>) => {

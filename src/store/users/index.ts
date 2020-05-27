@@ -1,1 +1,1 @@
-export { default, getUsers, resetUsers } from './slice';
+export { default, getUsers, getMoreUsers, resetUsers } from './slice';
