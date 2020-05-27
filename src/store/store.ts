@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
+import login from './login';
 import snackbar from './snackbar';
 import user from './user';
 import users from './users';
 
 const rootReducer = combineReducers({
+    login,
     snackbar,
     user,
     users,

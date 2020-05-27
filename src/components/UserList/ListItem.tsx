@@ -7,9 +7,10 @@ import {
     Theme,
 } from '@material-ui/core';
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, generatePath } from 'react-router-dom';
 
 import { UsersItemData } from '../../store/users/types';
+import routes from '../../config/routes';
 
 const UserCard = styled(Card)<{}, Theme>(({ theme }) => ({
     marginTop: theme.spacing(2),
@@ -33,7 +34,7 @@ const ListItem: FC<ListItemProps> = ({ id, firstName, lastName }) => (
         <ActionsContainer>
             <Button
                 component={Link}
-                to={`/users/${id}`}
+                to={generatePath(routes.user, { userId: id })}
                 color="secondary"
                 variant="contained"
             >
