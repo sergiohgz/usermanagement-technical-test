@@ -47,6 +47,31 @@ yarn install --frozen-lockfile
   - [x] Edition
 - [x] User login
 
+## Technical decisions
+
+This application is build using:
+- Typescript as language, to have a robust types system over Javascript
+- React as UI library, implementing components with function components and hooks, using JSX as sugar syntax for defining them
+- Redux as state management, with Redux Toolkit (RTK), the official opinionated way to use this library, with next middlewares and configuration
+  - Redux DevTools configuration (disabled for production manually)
+  - Redux Thunk middleware to dispatch asynchronous actions
+  - Immutable State Invariant middleware to compare state values across mutations (by default, enabled only for development)
+  - Serializable State Invariant middleware, because state should contain only serializable values to recover state in a deterministic way (by default, enabled only for development)
+  - Immer library to create reducers with simple assigns (with `=` operator) (feature provided by RTK but not used as it creates a false feeling of mutability on immutable state updates)
+- React Router DOM as single page application routing framework
+- Emotion to create styled components with a similar syntax to StyledComponents (no CSS classes directly)
+- Material UI as framework to keep consistency in app styles with Material Design
+- ESLint with my own set of rules, configured to apply different rules for different filetypes (e.g, Typescript Eslint rules are only applied in TS files)
+- React Testing Library to create some DOM test examples, using Jest as runner and Jasmine as syntax (inherit by React Scripts)
+- Husky, Lint Staged and Commitlint as dev tools to force user to follow a consistent guidelines in development
+  - Husky installs Git Hooks to run commands when they are executed (in this case, used only when commit is done)
+  - Lint Staged to lint only modified code when preparing the commit
+  - Commitlint with Conventional Commits configuration to check if commit follows a visual syntax that allows to automatize releases with tools such as Standard Version or Semantic Release
+- Github CI to check pushes on master or branches that have a pull request opened to be merged in master branch
+- Docker with a multistage configuration (based on Alpine Linux to keep a small microservice)
+  - Node 12 (LTS) to build application
+  - Nginx to serve application
+
 ## License
 
 This project implementation is under a [MIT license](./LICENSE)
