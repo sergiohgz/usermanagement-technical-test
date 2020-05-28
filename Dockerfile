@@ -1,6 +1,6 @@
 # Multistage Docker compile
 # Build stage
-FROM node:12 as build
+FROM node:12-alpine as build
 
 WORKDIR /app
 
