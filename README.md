@@ -45,7 +45,7 @@ yarn install --frozen-lockfile
   - [x] Detail
   - [x] Remove
   - [x] Edition
-- [ ] User login
+- [x] User login
 
 ## License
 
