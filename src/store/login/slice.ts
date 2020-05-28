@@ -10,7 +10,7 @@ const initialState: LoginState = {
 };
 
 const {
-    actions: { asyncStart, asyncSuccess, asyncError, logout },
+    actions: { asyncStart, asyncSuccess, asyncError, resetState },
     reducer,
 } = createSlice({
     name: 'login',
@@ -37,13 +37,13 @@ const {
             asyncError: true,
             error: payload,
         }),
-        logout: (): LoginState => ({
+        resetState: (): LoginState => ({
             ...initialState,
         }),
     },
 });
 
-const login = (
+const doLogin = (
     data: LoginForm
 ): AppThunk<ReturnType<typeof api.login>> => dispatch => {
     dispatch(asyncStart());
@@ -62,5 +62,5 @@ const login = (
     return promise;
 };
 
-export { asyncStart, asyncSuccess, asyncError, login, logout };
+export { asyncStart, asyncSuccess, asyncError, doLogin, resetState as logout };
 export default reducer;

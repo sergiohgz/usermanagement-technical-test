@@ -14,7 +14,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import routes from '../../config/routes';
-import { login } from '../../store/login';
+import { doLogin } from '../../store/login';
 import { LoginForm } from '../../store/login/types';
 import { AppDispatch } from '../../store/types';
 
@@ -50,7 +50,7 @@ const Login: FC = () => {
     };
 
     const submitLogin = (): void => {
-        dispatch(login(loginForm)).then(() => {
+        dispatch(doLogin(loginForm)).then(() => {
             history.push(routes.app);
         });
     };

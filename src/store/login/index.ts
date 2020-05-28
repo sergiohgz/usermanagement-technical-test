@@ -1,1 +1,1 @@
-export { default, login, logout } from './slice';
+export { default, doLogin, logout } from './slice';
