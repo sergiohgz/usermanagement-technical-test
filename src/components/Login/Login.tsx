@@ -97,6 +97,7 @@ const Login: FC = () => {
                                 <TextField
                                     label="Contraseña"
                                     name="password"
+                                    type="password"
                                     onChange={event =>
                                         handleChangeField(
                                             'password',
